@@ -1,10 +1,9 @@
 vim.g.mapleader = " "
 
-vim.keymap.set("n", ";", ":")
-vim.keymap.set("n", ":", ";")
-
 vim.keymap.set("n", "<esc>", vim.cmd.noh) -- no highlight
 vim.keymap.set("t", "<esc>", "<C-\\><C-n>")
+vim.keymap.set("c", "<C-n>", "<Nop>")
+vim.keymap.set("c", "<C-p>", "<Nop>")
 
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>w", vim.cmd.write)
@@ -12,7 +11,7 @@ vim.keymap.set("n", "<leader>x", vim.cmd.quit)
 vim.keymap.set("n", "<leader>h", vim.cmd.split)
 vim.keymap.set("n", "<leader>v", vim.cmd.vsplit)
 
-vim.keymap.set("n", "<C-f>", "<C-u>zz")
+vim.keymap.set("n", "<C-w>", "<C-u>zz")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 
 vim.keymap.set({ "n", "v" }, "<C-j>", "5j")
@@ -33,12 +32,10 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("x", "<leader>p", '"_dP')
-vim.keymap.set("n", "<leader>y", '"+y')
-vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>Y", '"+Y')
-vim.keymap.set("n", "<leader>d", '"_d')
-vim.keymap.set("v", "<leader>d", '"_d')
+vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
 
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
-vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+vim.keymap.set("n", "<leader>gs", vim.cmd.Floggit)
