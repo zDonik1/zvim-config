@@ -265,15 +265,16 @@ local plugins = {
 			lsp_zero.extend_lspconfig()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
-					"tsserver",
-					"rust_analyzer",
-					"clangd",
-					"cmake",
-					"denols",
-					"gopls",
-					"golangci_lint_ls",
 					"lua_ls",
-					"pylsp",
+					-- "tsserver",
+					-- "rust_analyzer",
+					-- "clangd",
+					-- "cmake",
+					-- "denols",
+					-- "gopls",
+					-- "golangci_lint_ls",
+					-- "pylsp",
+					--                "csharp_ls",
 				},
 				handlers = {
 					lsp_zero.default_setup,
