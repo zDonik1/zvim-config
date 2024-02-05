@@ -150,7 +150,7 @@ local plugins = {
 		"VonHeikemen/lsp-zero.nvim",
 		branch = "v3.x",
 		init = function()
-			require("lsp-zero").on_attach(function(client, bufnr)
+			require("lsp-zero").on_attach(function(_, bufnr)
 				local opts = { buffer = bufnr, remap = false }
 
 				vim.keymap.set("n", "gd", function()
@@ -194,6 +194,14 @@ local plugins = {
 	{
 		"hrsh7th/nvim-cmp",
 		event = { "InsertEnter", "CmdlineEnter" },
+		dependencies = {
+			"saadparwaiz1/cmp_luasnip",
+			"hrsh7th/cmp-nvim-lua",
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
+		},
 		config = function()
 			local cmp = require("cmp")
 			local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -220,6 +228,22 @@ local plugins = {
 							fallback()
 						end
 					end, { "i", "s", "c" }),
+				}),
+			})
+
+			-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+			cmp.setup.cmdline({ "/", "?" }, {
+				sources = {
+					{ name = "buffer" },
+				},
+			})
+
+			-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+			cmp.setup.cmdline(":", {
+				sources = cmp.config.sources({
+					{ name = "path" },
+				}, {
+					{ name = "cmdline" },
 				}),
 			})
 		end,
