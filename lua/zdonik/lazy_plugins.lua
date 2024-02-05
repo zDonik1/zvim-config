@@ -48,6 +48,7 @@ local plugins = {
 
 	{
 		"nvim-treesitter/nvim-treesitter",
+		dependencies = { "nvim-treesitter/nvim-treesitter-context" },
 		build = function()
 			vim.cmd("TSUpdate")
 		end,
