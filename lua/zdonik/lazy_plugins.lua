@@ -138,8 +138,12 @@ local plugins = {
 	},
 
 	{
-		"tpope/vim-fugitive",
-		event = "VeryLazy",
+		"rbong/vim-flog",
+		lazy = true,
+		cmd = { "Flog", "Flogsplit", "Floggit" },
+		dependencies = {
+			"tpope/vim-fugitive",
+		},
 	},
 
 	{
