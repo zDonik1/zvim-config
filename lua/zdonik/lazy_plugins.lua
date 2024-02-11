@@ -27,7 +27,8 @@ local plugins = {
 
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>kf", builtin.find_files, {})
-			vim.keymap.set("n", "<leader>ko", builtin.git_files, {})
+			vim.keymap.set("n", "<leader>ko", builtin.oldfiles, {})
+			vim.keymap.set("n", "<leader>kg", builtin.git_files, {})
 			vim.keymap.set("n", "<leader>kw", builtin.live_grep, {})
 			vim.keymap.set("n", "<leader>kb", builtin.buffers, {})
 		end,
@@ -75,7 +76,7 @@ local plugins = {
 			vim.keymap.set("n", "<leader>a", function()
 				harpoon:list():append()
 			end)
-			vim.keymap.set("n", "<leader>o", function()
+			vim.keymap.set("n", "<leader>h", function()
 				harpoon.ui:toggle_quick_menu(harpoon:list())
 			end)
 
@@ -93,10 +94,10 @@ local plugins = {
 			end)
 
 			-- Toggle previous & next buffers stored within Harpoon list
-			vim.keymap.set("n", "<C-g>", function()
+			vim.keymap.set("n", "<C-u>", function()
 				harpoon:list():prev()
 			end)
-			vim.keymap.set("n", "<C-h>", function()
+			vim.keymap.set("n", "<C-i>", function()
 				harpoon:list():next()
 			end)
 		end,
@@ -299,6 +300,32 @@ local plugins = {
 				},
 			})
 		end,
+	},
+
+	{
+		"epwalsh/obsidian.nvim",
+		version = "*", -- recommended, use latest release instead of latest commit
+		lazy = true,
+		ft = "markdown",
+		cmd = "ObsidianQuickSwitch",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"hrsh7th/nvim-cmp",
+			"nvim-telescope/telescope.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		opts = {
+			workspaces = {
+				{
+					name = "personal",
+					path = "~/iCloudDrive/iCloud~md~obsidian/SecondBrain",
+				},
+			},
+			daily_notes = {
+				folder = "periodic_notes",
+				template = "templates/daily_template.md",
+			},
+		},
 	},
 }
 

@@ -4,6 +4,7 @@ vim.keymap.set("n", "<esc>", vim.cmd.noh) -- no highlight
 vim.keymap.set("t", "<esc>", "<C-\\><C-n>")
 vim.keymap.set("c", "<C-n>", "<Nop>")
 vim.keymap.set("c", "<C-p>", "<Nop>")
+vim.keymap.set("n", "<C-e>", "<C-r>")
 
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>w", vim.cmd.write)
@@ -39,3 +40,10 @@ vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 vim.keymap.set("n", "<leader>gs", vim.cmd.Floggit)
+
+vim.keymap.set("n", "<leader>oo", "<cmd>ObsidianOpen<cr>")
+vim.keymap.set("n", "<leader>oq", "<cmd>ObsidianQuickSwitch<cr>")
+vim.keymap.set("n", "<leader>od", "<cmd>ObsidianToday<cr>")
+vim.keymap.set("n", "<leader>on", "<cmd>ObsidianToday +1<cr>")
+vim.keymap.set("n", "<leader>op", "<cmd>ObsidianToday -1<cr>")
+vim.keymap.set("n", "<leader>ot", "<cmd>ObsidianTemplate<cr>")

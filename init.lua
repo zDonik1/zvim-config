@@ -12,14 +12,13 @@ autocmd("BufWritePost", {
 
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
-vim.opt.textwidth = 100
 vim.opt.expandtab = true
-vim.opt.colorcolumn = "+1"
+vim.opt.colorcolumn = "101"
 vim.opt.rnu = true
 vim.opt.nu = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.wrap = false
+vim.opt.linebreak = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.termguicolors = true
