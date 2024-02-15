@@ -297,6 +297,7 @@ local plugins = {
 					lua = { require("formatter.filetypes.lua").stylua },
 					cpp = { require("formatter.filetypes.cpp").clangformat },
 					rust = { require("formatter.filetypes.rust").rustfmt },
+					cs = { require("formatter.filetypes.cs").csharpier },
 				},
 			})
 		end,
