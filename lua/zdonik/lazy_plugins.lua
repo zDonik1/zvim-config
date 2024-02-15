@@ -334,6 +334,17 @@ local plugins = {
 			},
 		},
 	},
+
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		event = "BufReadPre",
+		opts = {
+			scope = { enabled = false },
+		},
+		config = function(_, opts)
+			require("ibl").setup(opts)
+		end,
+	},
 }
 
 require("lazy").setup(plugins)
