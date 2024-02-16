@@ -161,7 +161,7 @@ local plugins = {
 				vim.keymap.set("n", "K", function()
 					vim.lsp.buf.hover()
 				end, opts)
-				vim.keymap.set("n", "<leader>vws", function()
+				vim.keymap.set("n", "<leader>vks", function()
 					vim.lsp.buf.workspace_symbol()
 				end, opts)
 				vim.keymap.set("n", "<leader>vd", function()
