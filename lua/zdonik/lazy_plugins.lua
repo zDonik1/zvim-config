@@ -322,6 +322,7 @@ local plugins = {
 			"nvim-treesitter/nvim-treesitter",
 		},
 		opts = {
+			disable_frontmatter = true,
 			workspaces = {
 				{
 					name = "personal",
@@ -332,6 +333,12 @@ local plugins = {
 				folder = "periodic_notes",
 				template = "templates/daily_template.md",
 			},
+			templates = {
+				subdir = "templates",
+			},
+			note_id_func = function(title)
+				return title
+			end,
 		},
 	},
 
