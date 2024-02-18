@@ -257,8 +257,6 @@ local plugins = {
 
 	{ "neovim/nvim-lspconfig" },
 
-	{ "hrsh7th/cmp-nvim-lsp" },
-
 	{
 		"hrsh7th/nvim-cmp",
 		event = { "InsertEnter", "CmdlineEnter" },
@@ -421,6 +419,32 @@ local plugins = {
 		},
 		config = function(_, opts)
 			require("gitsigns").setup(opts)
+		end,
+	},
+
+	{
+		"kylechui/nvim-surround",
+		event = "VeryLazy",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-treesitter/nvim-treesitter-textobjects",
+		},
+		config = function()
+			require("nvim-surround").setup({
+				-- Configuration here, or leave empty to use defaults
+			})
+		end,
+	},
+
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		dependencies = { "hrsh7th/nvim-cmp" },
+		config = function()
+			require("nvim-autopairs").setup()
+			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+			local cmp = require("cmp")
+			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	},
 }
