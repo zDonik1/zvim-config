@@ -459,6 +459,16 @@ local plugins = {
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	},
+
+	{
+		"itchyny/calendar.vim",
+		cmd = "Calendar",
+	},
+
+	{
+		"tpope/vim-unimpaired",
+		event = "VeryLazy",
+	},
 }
 
 require("lazy").setup(plugins)
