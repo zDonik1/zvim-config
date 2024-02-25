@@ -379,6 +379,7 @@ local plugins = {
 			"nvim-treesitter/nvim-treesitter",
 		},
 		opts = {
+			sort_by = "accessed",
 			disable_frontmatter = true,
 			workspaces = {
 				{
@@ -388,11 +389,23 @@ local plugins = {
 			},
 			daily_notes = {
 				folder = "periodic_notes",
-				template = "templates/daily_template.md",
+				template = "daily_template.md",
 			},
 			templates = {
 				subdir = "templates",
+				time_format = "%X",
+				substitutions = {
+					["time:HH:mm:ss"] = function()
+						return os.date("%X")
+					end,
+				},
 			},
+			completion = {
+				nvim_cmp = true,
+				min_chars = 1,
+			},
+			notes_subdir = "/",
+			new_notes_location = "notes_subdir",
 			note_id_func = function(title)
 				return title
 			end,
