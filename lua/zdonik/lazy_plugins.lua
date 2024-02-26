@@ -13,6 +13,28 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
 	{
+		"catppuccin/nvim",
+		lazy = false,
+		config = function()
+			require("catppuccin").setup({
+				-- transparent_background = true,
+				show_end_of_buffer = true,
+			})
+
+			vim.cmd.colorscheme("catppuccin")
+		end,
+	},
+
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		lazy = false,
+		config = function()
+			require("lualine").setup()
+		end,
+	},
+
+	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -31,19 +53,6 @@ local plugins = {
 			vim.keymap.set("n", "<leader>kg", builtin.git_files, {})
 			vim.keymap.set("n", "<leader>kw", builtin.live_grep, {})
 			vim.keymap.set("n", "<leader>kb", builtin.buffers, {})
-		end,
-	},
-
-	{
-		"catppuccin/nvim",
-		lazy = false,
-		config = function()
-			require("catppuccin").setup({
-				-- transparent_background = true,
-				show_end_of_buffer = true,
-			})
-
-			vim.cmd.colorscheme("catppuccin")
 		end,
 	},
 
