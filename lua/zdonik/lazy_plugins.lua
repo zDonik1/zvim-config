@@ -15,11 +15,16 @@ local plugins = {
 	{
 		"catppuccin/nvim",
 		lazy = false,
-		config = function()
-			require("catppuccin").setup({
-				-- transparent_background = true,
-				show_end_of_buffer = true,
-			})
+		opts = {
+			show_end_of_buffer = true,
+			custom_highlights = function(colors)
+				return {
+					["@text.emphasis"] = { fg = colors.green },
+				}
+			end,
+		},
+		config = function(_, opts)
+			require("catppuccin").setup(opts)
 
 			vim.cmd.colorscheme("catppuccin")
 		end,
@@ -68,7 +73,18 @@ local plugins = {
 		end,
 		opts = {
 			auto_install = true,
-			ensure_installed = { "javascript", "typescript", "c", "cpp", "lua", "vim", "vimdoc", "query" },
+			ensure_installed = {
+				"javascript",
+				"typescript",
+				"c",
+				"cpp",
+				"lua",
+				"vim",
+				"vimdoc",
+				"query",
+				"markdown",
+				"markdown_inline",
+			},
 			highlight = {
 				enable = true,
 				additional_vim_regex_highlighting = false,
@@ -412,38 +428,69 @@ local plugins = {
 			"nvim-telescope/telescope.nvim",
 			"nvim-treesitter/nvim-treesitter",
 		},
-		opts = {
-			sort_by = "accessed",
-			disable_frontmatter = true,
-			workspaces = {
-				{
-					name = "personal",
-					path = "~/iCloudDrive/iCloud~md~obsidian/SecondBrain",
+		config = function()
+			local mocha = require("catppuccin.palettes").get_palette("mocha")
+
+			require("obsidian").setup({
+				sort_by = "accessed",
+				disable_frontmatter = true,
+				workspaces = {
+					{
+						name = "personal",
+						path = "~/iCloudDrive/iCloud~md~obsidian/SecondBrain",
+					},
 				},
-			},
-			daily_notes = {
-				folder = "periodic_notes",
-				template = "daily_template.md",
-			},
-			templates = {
-				subdir = "templates",
-				time_format = "%X",
-				substitutions = {
-					["time:HH:mm:ss"] = function()
-						return os.date("%X")
-					end,
+				daily_notes = {
+					folder = "periodic_notes",
+					template = "daily_template.md",
 				},
-			},
-			completion = {
-				nvim_cmp = true,
-				min_chars = 1,
-			},
-			notes_subdir = "/",
-			new_notes_location = "notes_subdir",
-			note_id_func = function(title)
-				return title
-			end,
-		},
+				templates = {
+					subdir = "templates",
+					time_format = "%X",
+					substitutions = {
+						["time:HH:mm:ss"] = function()
+							return os.date("%X")
+						end,
+					},
+				},
+				completion = {
+					nvim_cmp = true,
+					min_chars = 1,
+				},
+				notes_subdir = "/",
+				new_notes_location = "notes_subdir",
+				note_id_func = function(title)
+					return title
+				end,
+				mappings = {
+					["gf"] = {
+						action = function()
+							return require("obsidian").util.gf_passthrough()
+						end,
+						opts = { noremap = false, expr = true, buffer = true },
+					},
+					["<leader>oh"] = {
+						action = function()
+							return require("obsidian").util.toggle_checkbox()
+						end,
+						opts = { buffer = true },
+					},
+				},
+				ui = {
+					hl_groups = {
+						ObsidianTodo = { bold = true, fg = mocha.peach },
+						ObsidianDone = { bold = true, fg = mocha.sapphire },
+						ObsidianRightArrow = { bold = true, fg = mocha.peach },
+						ObsidianTilde = { bold = true, fg = mocha.red },
+						ObsidianBullet = { bold = true, fg = mocha.sky },
+						ObsidianRefText = { underline = true, fg = mocha.mauve },
+						ObsidianExtLinkIcon = { fg = mocha.mauve },
+						ObsidianTag = { italic = true, fg = mocha.teal },
+						ObsidianHighlightText = { bg = mocha.flamingo },
+					},
+				},
+			})
+		end,
 	},
 
 	{
@@ -502,6 +549,13 @@ local plugins = {
 	{
 		"tpope/vim-unimpaired",
 		event = "VeryLazy",
+	},
+
+	{
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup()
+		end,
 	},
 }
 

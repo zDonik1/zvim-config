@@ -1,14 +1,4 @@
 require("zdonik.remap")
-require("zdonik.lazy_plugins")
-
-local augroup = vim.api.nvim_create_augroup
-local autocmd = vim.api.nvim_create_autocmd
-
-augroup("__formatter__", { clear = true })
-autocmd("BufWritePost", {
-	group = "__formatter__",
-	command = ":FormatWrite",
-})
 
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
@@ -25,6 +15,17 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.smartindent = true
 vim.opt.showmode = false
+
+require("zdonik.lazy_plugins")
+
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
+
+augroup("__formatter__", { clear = true })
+autocmd("BufWritePost", {
+	group = "__formatter__",
+	command = ":FormatWrite",
+})
 
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
