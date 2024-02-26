@@ -266,10 +266,40 @@ local plugins = {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
+			"petertriho/cmp-git",
 		},
 		config = function()
 			local cmp = require("cmp")
 			local cmp_select = { behavior = cmp.SelectBehavior.Select }
+
+			local expand_mappings = function(mappings, modes)
+				local new_mappings = {}
+				for key, map_func in pairs(mappings) do
+					new_mappings[key] = cmp.mapping(map_func, modes)
+				end
+				return new_mappings
+			end
+			local mappings = {
+				["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
+				["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
+				["<Up>"] = cmp.mapping.select_prev_item(cmp_select),
+				["<Down>"] = cmp.mapping.select_next_item(cmp_select),
+				["<C-Space>"] = cmp.mapping.complete(),
+				["<Tab>"] = function(fallback)
+					if cmp.visible() then
+						cmp.confirm({ select = true })
+					else
+						fallback()
+					end
+				end,
+				["<CR>"] = function(fallback)
+					if cmp.visible() and cmp.get_active_entry() then
+						cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+					else
+						fallback()
+					end
+				end,
+			}
 
 			cmp.setup({
 				sources = {
@@ -280,36 +310,31 @@ local plugins = {
 					{ name = "buffer", keyword_length = 3 },
 				},
 				formatting = require("lsp-zero").cmp_format(),
-				mapping = cmp.mapping.preset.insert({
-					["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-					["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-					["<C-y>"] = cmp.mapping.confirm({ select = true }),
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<Tab>"] = cmp.mapping(function(fallback)
-						-- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
-						if cmp.visible() then
-							cmp.confirm({ select = true })
-						else
-							fallback()
-						end
-					end, { "i", "s", "c" }),
+				mapping = expand_mappings(mappings, { "i", "s" }),
+			})
+
+			cmp.setup.filetype("gitcommit", {
+				sources = cmp.config.sources({
+					{ name = "git" },
+				}, {
+					{ name = "buffer" },
 				}),
 			})
 
-			-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 			cmp.setup.cmdline({ "/", "?" }, {
 				sources = {
 					{ name = "buffer" },
 				},
+				mapping = expand_mappings(mappings, { "c" }),
 			})
 
-			-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 			cmp.setup.cmdline(":", {
 				sources = cmp.config.sources({
 					{ name = "path" },
 				}, {
 					{ name = "cmdline" },
 				}),
+				mapping = expand_mappings(mappings, { "c" }),
 			})
 		end,
 	},
