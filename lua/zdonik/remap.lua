@@ -6,17 +6,22 @@ vim.keymap.set("c", "<C-n>", "<Nop>")
 vim.keymap.set("c", "<C-p>", "<Nop>")
 vim.keymap.set("n", "<C-e>", "<C-r>")
 
+-- common commands
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>w", vim.cmd.write)
 vim.keymap.set("n", "<leader>x", vim.cmd.quit)
 vim.keymap.set("n", "<leader>ss", vim.cmd.split)
 vim.keymap.set("n", "<leader>sv", vim.cmd.vsplit)
+vim.keymap.set("n", "<leader>qq", vim.cmd.cclose)
 
+-- navigation
 vim.keymap.set("n", "<C-w>", "<C-u>zz")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
-
+vim.keymap.set("n", "<C-u>", "<C-w>")
 vim.keymap.set({ "n", "v" }, "<C-j>", "5j")
 vim.keymap.set({ "n", "v" }, "<C-k>", "5k")
+
+-- window navigation
 vim.keymap.set("n", "<A-h>", "<C-w>h")
 vim.keymap.set("n", "<A-l>", "<C-w>l")
 vim.keymap.set("n", "<A-j>", "<C-w>j")
@@ -25,6 +30,9 @@ vim.keymap.set("t", "<A-h>", "<C-\\><C-n><C-w>h")
 vim.keymap.set("t", "<A-l>", "<C-\\><C-n><C-w>l")
 vim.keymap.set("t", "<A-j>", "<C-\\><C-n><C-w>j")
 vim.keymap.set("t", "<A-k>", "<C-\\><C-n><C-w>k")
+vim.keymap.set("n", "<leader>rr", "<C-w>p", { desc = "go to last window" })
+vim.keymap.set("n", "<leader>rm", "<C-w>W", { desc = "cycle window backward (towards top-left)" })
+vim.keymap.set("n", "<leader>rf", "<C-w>w", { desc = "cycle window forward (towards bottom-right)" })
 
 vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv")
@@ -36,8 +44,6 @@ vim.keymap.set("x", "<leader>p", '"_dP')
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>Y", '"+Y')
 vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
-
-vim.keymap.set("n", "<leader>qq", vim.cmd.cclose)
 
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
