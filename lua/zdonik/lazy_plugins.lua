@@ -165,10 +165,10 @@ local plugins = {
 			local harpoon = require("harpoon")
 			harpoon:setup()
 
-			vim.keymap.set("n", "<leader>a", function()
+			vim.keymap.set("n", "<leader>ha", function()
 				harpoon:list():append()
 			end)
-			vim.keymap.set("n", "<leader>h", function()
+			vim.keymap.set("n", "<leader>hh", function()
 				harpoon.ui:toggle_quick_menu(harpoon:list())
 			end)
 
@@ -186,10 +186,10 @@ local plugins = {
 			end)
 
 			-- Toggle previous & next buffers stored within Harpoon list
-			vim.keymap.set("n", "<C-u>", function()
+			vim.keymap.set("n", "<leader>hp", function()
 				harpoon:list():prev()
 			end)
-			vim.keymap.set("n", "<C-i>", function()
+			vim.keymap.set("n", "<leader>hn", function()
 				harpoon:list():next()
 			end)
 		end,
