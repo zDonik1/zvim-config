@@ -411,6 +411,7 @@ local plugins = {
 					cpp = { require("formatter.filetypes.cpp").clangformat },
 					rust = { require("formatter.filetypes.rust").rustfmt },
 					cs = { require("formatter.filetypes.cs").csharpier },
+					python = { require("formatter.filetypes.python").autopep8 },
 				},
 			})
 		end,
