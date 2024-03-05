@@ -49,7 +49,32 @@ local plugins = {
 			},
 		},
 		config = function()
-			require("telescope").setup()
+			local command = {
+				"rg",
+				"--color=never",
+				"--no-heading",
+				"--with-filename",
+				"--line-number",
+				"--column",
+				"--smart-case",
+				-- additional custom options
+				"--hidden",
+				"--no-ignore",
+				"--glob",
+				"!**/.git/*",
+			}
+			local file_command = command
+			table.insert(file_command, "--files")
+			require("telescope").setup({
+				defaults = {
+					vimgrep_arguments = command,
+				},
+				pickers = {
+					find_files = {
+						find_command = file_command,
+					},
+				},
+			})
 			require("telescope").load_extension("fzf")
 
 			local builtin = require("telescope.builtin")
