@@ -184,6 +184,7 @@ local plugins = {
 
 	{
 		"ThePrimeagen/harpoon",
+		keys = { "<leader>h", "<C-r>", "<C-m>", "<C-f>", "<C-p>" },
 		branch = "harpoon2",
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
 		config = function()
@@ -231,7 +232,7 @@ local plugins = {
 
 	{
 		"numToStr/Comment.nvim",
-		event = "VeryLazy",
+		keys = "<leader>c",
 		config = function()
 			require("Comment").setup({
 				toggler = {
@@ -391,8 +392,9 @@ local plugins = {
 
 	{
 		"williamboman/mason.nvim",
+		cmd = "Mason",
 		config = function()
-			require("mason").setup({})
+			require("mason").setup()
 		end,
 	},
 
@@ -428,6 +430,7 @@ local plugins = {
 
 	{
 		"mhartington/formatter.nvim",
+		cmd = "FormatWrite",
 		config = function()
 			require("formatter").setup({
 				filetype = {
@@ -446,7 +449,7 @@ local plugins = {
 		version = "*", -- recommended, use latest release instead of latest commit
 		lazy = true,
 		ft = "markdown",
-		cmd = "ObsidianQuickSwitch",
+		cmd = { "ObsidianQuickSwitch", "ObsidianToday" },
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"hrsh7th/nvim-cmp",
@@ -573,7 +576,7 @@ local plugins = {
 
 	{
 		"tpope/vim-unimpaired",
-		event = "VeryLazy",
+		keys = { "[", "]" },
 	},
 
 	{
